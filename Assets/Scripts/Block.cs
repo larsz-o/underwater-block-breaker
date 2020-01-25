@@ -5,11 +5,14 @@ using UnityEngine;
 public class Block : MonoBehaviour
 {
     [SerializeField] AudioClip breakSound;
-    Level level; // cached reference 
-
+    
+    // cached reference 
+    Level level; 
+    GameStatus gameStatus;
     private void Start ()
     {
         level = FindObjectOfType<Level>();
+        gameStatus = FindObjectOfType<GameStatus>();
         // each block will "count" itself at the start of play
         level.CountBreakableBlocks();
     }
@@ -17,5 +20,7 @@ public class Block : MonoBehaviour
     {
         AudioSource.PlayClipAtPoint(breakSound, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z));
         Destroy(gameObject);
+        gameStatus.AddToScore();
+        level.BlockDestroyed();
     }
 }
