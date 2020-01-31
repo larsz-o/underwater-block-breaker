@@ -15,9 +15,12 @@ public class SceneLoader : MonoBehaviour
     public void LoadStartScene()
     {
         FindObjectOfType<GameSession>().ResetScore();
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene("StartMenu");
     }
-
+    public void LoadFirstLevel()
+    {
+        SceneManager.LoadScene(1);
+    }
     public void QuitGame()
     {
         Application.Quit();
